@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.stable.custom_build">
+	<ext_resource path="res://particle.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://laser.png" type="Texture" index="0"></ext_resource>
+	<resource type="RectangleShape2D" path="local://11">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 10, 2 </vector2>
+
+	</resource>
+	<resource type="GDScript" path="local://12">
+		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;    if not (get_overlapping_bodies().empty()): &#000a;        var body = get_overlapping_bodies()[0]&#000a;        if ( body.is_type(&quot;KinematicBody2D&quot;) ):&#000a;            if ( body.delay == 0 ):&#000a;                body.get_node(&quot;Sprite&quot;).set_modulate(Color(&quot;ff0000&quot;))&#000a;                body.set_layer_mask_bit(2, false)&#000a;                body.delay = 60&#000a;                print(&quot;Laser Ow!&quot;)&#000a;        queue_free()&#000a;    move_local_x(3)&#000a;&#000a;&#000a;func _ready():&#000a;    set_fixed_process(true)    &#000a;&#000a;" </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="42">
+				<string> "bullethit" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "Area2D" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "shape" </string>
+				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
+				<string> "Sprite" </string>
+				<string> "texture" </string>
+				<string> "Particles2D" </string>
+				<string> "config/amount" </string>
+				<string> "config/lifetime" </string>
+				<string> "config/local_space" </string>
+				<string> "config/texture" </string>
+				<string> "params/direction" </string>
+				<string> "params/spread" </string>
+				<string> "params/linear_velocity" </string>
+				<string> "params/spin_velocity" </string>
+				<string> "params/orbit_velocity" </string>
+				<string> "params/gravity_direction" </string>
+				<string> "params/gravity_strength" </string>
+				<string> "params/radial_accel" </string>
+				<string> "params/tangential_accel" </string>
+				<string> "params/damping" </string>
+				<string> "params/initial_angle" </string>
+				<string> "params/initial_size" </string>
+				<string> "params/final_size" </string>
+				<string> "params/hue_variation" </string>
+				<string> "params/anim_speed_scale" </string>
+				<string> "params/anim_initial_pos" </string>
+				<string> "color/color" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 4 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="102"> 				-1, -1, 13, 0, -1, 12, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10, 12, 11, 0, 0, 0, 14, 14, -1, 3, 15, 1, 16, 3, 17, 12, 0, 0, 0, 18, 18, -1, 1, 19, 13, 0, 0, 0, 20, 20, -1, 21, 21, 14, 22, 15, 23, 3, 24, 16, 25, 17, 26, 18, 27, 19, 28, 18, 29, 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36, 21, 37, 7, 38, 20, 39, 7, 40, 20, 41, 22, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="23" shared="false">
+				<bool> True </bool>
+				<resource  resource_type="Shape2D" path="local://11">  </resource>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<bool> False </bool>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<real> 1 </real>
+				<int> 16384 </int>
+				<int> 5 </int>
+				<resource  resource_type="Script" path="local://12">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "2D" </string>
+				</dictionary>
+				<int> 0 </int>
+				<resource  external="0">  </resource>
+				<int> 20 </int>
+				<real> 0.5 </real>
+				<resource  external="1">  </resource>
+				<real> 270 </real>
+				<real> 10 </real>
+				<real> 100 </real>
+				<real> 0 </real>
+				<real> 3 </real>
+				<color> 0.803661, 0.0452881, 0.828125, 1 </color>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
