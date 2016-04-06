@@ -12,7 +12,7 @@ func _ready():
 func _process(delta):
 	tempElapsed = tempElapsed + delta
 	
-	if (tempElapsed > 1):
+	if (tempElapsed > .5):
 		if (get_frame() == self.get_sprite_frames().get_frame_count() -1):
 			set_frame(0)
 		else:

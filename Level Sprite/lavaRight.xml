@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="7" version="2.0" version_name="Godot Engine v2.0.stable.official">
+	<ext_resource path="res://Scripts/lava animate.gd" type="Script" index="2"></ext_resource>
+	<ext_resource path="res://Level Sprite/lava/lava0002.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://Level Sprite/lava/lava0005.png" type="Texture" index="1"></ext_resource>
+	<resource type="SpriteFrames" path="local://1">
+		<array name="frames" len="2" shared="false">
+			<resource  external="0">  </resource>
+			<resource  external="1">  </resource>
+		</array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://2">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			-32, 32, -32, -14.9333, 2.13334, -14.9333, 32, 32 </vector2_array>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://3">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			32, -32, 32, 32, 2.13334, -14.9333, 2.13334, -32 </vector2_array>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="25">
+				<string> "Lava_Right" </string>
+				<string> "Node2D" </string>
+				<string> "AnimatedSprite" </string>
+				<string> "frames" </string>
+				<string> "script/script" </string>
+				<string> "StaticBody2D" </string>
+				<string> "transform/scale" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "shapes/1/shape" </string>
+				<string> "shapes/1/transform" </string>
+				<string> "shapes/1/trigger" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "constant_linear_velocity" </string>
+				<string> "constant_angular_velocity" </string>
+				<string> "friction" </string>
+				<string> "bounce" </string>
+				<string> "CollisionPolygon2D" </string>
+				<string> "build_mode" </string>
+				<string> "polygon" </string>
+				<string> "shape_range" </string>
+				<string> "trigger" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 4 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="68"> 				-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 2, 3, 0, 4, 1, 0, 0, 0, 5, 5, -1, 14, 6, 2, 7, 3, 8, 4, 9, 5, 10, 3, 11, 6, 12, 5, 13, 3, 14, 7, 15, 7, 16, 8, 17, 9, 18, 10, 19, 9, 0, 2, 0, 20, 20, -1, 4, 21, 11, 22, 12, 23, 13, 24, 3, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="14" shared="false">
+				<resource  resource_type="SpriteFrames" path="local://1">  </resource>
+				<resource  external="2">  </resource>
+				<vector2> 0.9375, 0.9375 </vector2>
+				<bool> False </bool>
+				<resource  resource_type="Shape2D" path="local://2">  </resource>
+				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
+				<resource  resource_type="Shape2D" path="local://3">  </resource>
+				<int> 1 </int>
+				<vector2> 0, 0 </vector2>
+				<real> 0 </real>
+				<real> 1 </real>
+				<int> 0 </int>
+				<vector2_array  len="6"> 					-32, -14.9333, 2.13334, -14.9333, 2.13334, -32, 32, -32, 32, 32, -32, 32 </vector2_array>
+				<vector2> 0, 1 </vector2>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
