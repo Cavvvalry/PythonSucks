@@ -26,11 +26,16 @@ func _move_player(delta):
 	get_node("Run_Left").set_hidden(true)
 	get_node("Run_Right").set_hidden(true)
 	velocity.y += delta * GRAVITY
+	if velocity.x > MOVE_SPEED:
+		velocity.x = MOVE_SPEED
+	if velocity.x < -MOVE_SPEED:
+		velocity.x = -MOVE_SPEED
 	motion = velocity * delta
-	motion = move(motion)
+	get_node("CollisionShape2D/Label").set_text("X:" + str(motion.x))
 	if (is_colliding()):
 		var n = get_collision_normal()
 		motion = n.slide(motion)
+		move(motion)
 		velocity = n.slide(velocity)
 		if ( Input.is_action_pressed("ui_up")):
 			velocity.y = -300
@@ -52,13 +57,14 @@ func _move_player(delta):
 			get_node("Sprite_Left").set_hidden(not left)
 			get_node("Sprite_Right").set_hidden(left)
 	else:
+		move(motion)
 		if ( Input.is_action_pressed("ui_left")):
 			left = true
-			velocity.x -= MOVE_SPEED * 0.01
+			velocity.x -= MOVE_SPEED * 0.1
 			get_node("Run_Left").set_hidden(false)
 		elif ( Input.is_action_pressed("ui_right")):
 			left = false
-			velocity.x += MOVE_SPEED * 0.01
+			velocity.x += MOVE_SPEED * 0.1
 			get_node("Run_Right").set_hidden(false)
 		else:
 			animation_ctr = 0
