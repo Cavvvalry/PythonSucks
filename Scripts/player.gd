@@ -7,6 +7,8 @@ var left = false
 var animation_ctr = 0 
 var velocity = Vector2()
 var motion = Vector2()
+var health = 100
+var score = 0
 
 func _fixed_process(delta):
 	_move_player(delta)
@@ -31,7 +33,8 @@ func _move_player(delta):
 	if velocity.x < -MOVE_SPEED:
 		velocity.x = -MOVE_SPEED
 	motion = velocity * delta
-	get_node("CollisionShape2D/Label").set_text("X:" + str(motion.x))
+	get_node("HUD ParaBKG/HUD ParaLYR/Label").set_text(str(score))
+	get_node("HUD ParaBKG/HUD ParaLYR/ProgressBar").set_value(health)
 	if (is_colliding()):
 		var n = get_collision_normal()
 		motion = n.slide(motion)
@@ -39,6 +42,7 @@ func _move_player(delta):
 		velocity = n.slide(velocity)
 		if ( Input.is_action_pressed("ui_up")):
 			velocity.y = -300
+			score += 1
 		if ( Input.is_action_pressed("ui_left")):
 			left = true
 			animation_ctr += .2
