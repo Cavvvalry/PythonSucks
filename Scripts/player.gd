@@ -41,8 +41,9 @@ func _move_player(delta):
 		move(motion)
 		velocity = n.slide(velocity)
 		if ( Input.is_action_pressed("ui_up")):
-			velocity.y = -300
-			score += 1
+			if n.y < 0:
+				velocity.y = -300
+				score += 1
 		if ( Input.is_action_pressed("ui_left")):
 			left = true
 			animation_ctr += .2
