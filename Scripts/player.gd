@@ -36,7 +36,7 @@ func _move_player(delta):
 	motion = velocity * delta
 	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
 	get_node("HUD ParaBKG/HUD ParaLYR/Health").set_value(health)
-	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(score)
+	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(100 - score)
 	print(score)
 	
 	if is_colliding():
