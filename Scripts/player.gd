@@ -10,9 +10,18 @@ var motion = Vector2()
 var health = 100
 var score = 0
 var jmp_detect = 0 
+var n = Vector2()
+var delay = 0
 
 func _fixed_process(delta):
 	_move_player(delta)
+	if delay < 15:
+		get_node("hitLight").set_enabled(false)
+	if delay > 0:
+		delay -= 1
+	if delay == 0:
+		set_layer_mask_bit(2, true)
+
 
 func _ready():
 	# Initially sets all spritest to hidden
@@ -24,10 +33,6 @@ func _ready():
 
 
 func _move_player(delta):
-	get_node("Sprite_Left").set_hidden(true)
-	get_node("Sprite_Right").set_hidden(true)
-	get_node("Run_Left").set_hidden(true)
-	get_node("Run_Right").set_hidden(true)
 	velocity.y += delta * GRAVITY
 	if velocity.x > MOVE_SPEED:
 		velocity.x = MOVE_SPEED
@@ -41,11 +46,7 @@ func _move_player(delta):
 	
 	if is_colliding():
 		jmp_detect = 0
-	else:
-		jmp_detect += 1 
-	
-	if (jmp_detect < 2):
-		var n = get_collision_normal()
+		n = get_collision_normal()
 		motion = n.slide(motion)
 		move(motion)
 		velocity = n.slide(velocity)
@@ -55,29 +56,39 @@ func _move_player(delta):
 				score += 1
 		if ( Input.is_action_pressed("ui_left")):
 			left = true
-			animation_ctr += .1
+			animation_ctr += .3
 			velocity.x = -MOVE_SPEED
+			get_node("Sprite_Left").set_hidden(true)
+			get_node("Sprite_Right").set_hidden(true)
+			get_node("Run_Right").set_hidden(true)
 			get_node("Run_Left").set_hidden(false)
 			get_node("Run_Left").set_frame(int(animation_ctr) % 4)
 		elif ( Input.is_action_pressed("ui_right")):
 			left = false
-			animation_ctr += .1
+			animation_ctr += .3
 			velocity.x = MOVE_SPEED
+			get_node("Sprite_Left").set_hidden(true)
+			get_node("Sprite_Right").set_hidden(true)
+			get_node("Run_Left").set_hidden(true)
 			get_node("Run_Right").set_hidden(false)
 			get_node("Run_Right").set_frame(int(animation_ctr) % 4)
 		else:
 			animation_ctr = 0
 			velocity.x = 0
+			get_node("Run_Left").set_hidden(true)
+			get_node("Run_Right").set_hidden(true)
 			get_node("Sprite_Left").set_hidden(not left)
 			get_node("Sprite_Right").set_hidden(left)
 	else:
 		move(motion)
 		jmp_detect += 1
-		if jmp_detect > 2:
+		if jmp_detect >= 2:
+			get_node("Sprite_Left").set_hidden(true)
+			get_node("Sprite_Right").set_hidden(true)
 			get_node("Run_Left").set_frame(0)
 			get_node("Run_Right").set_frame(0)
 			get_node("Run_Left").set_hidden(not left)
-			get_node("Run_Right").set_hidden(left)				
+			get_node("Run_Right").set_hidden(left)
 		if ( Input.is_action_pressed("ui_left")):
 			left = true
 			velocity.x -= MOVE_SPEED * 0.1
