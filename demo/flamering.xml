@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="7" version="2.0" version_name="Godot Engine v2.0.stable.custom_build">
+	<ext_resource path="res://particle.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://flamering.png" type="Texture" index="0"></ext_resource>
+	<resource type="RectangleShape2D" path="local://3">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 0.448515, 13 </vector2>
+
+	</resource>
+	<resource type="GDScript" path="local://4">
+		<string name="script/source"> "extends KinematicBody2D&#000a;&#000a;const GRAVITY = 300.0&#000a;const WALK_SPEED = 300&#000a;&#000a;var velocity = Vector2()&#000a;var direction = 1&#000a;var start_pos = Vector2()&#000a;var pos_array = Vector2Array()&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;start_pos = get_node(&quot;Sprite&quot;).get_pos()&#000a;&#0009;if (pos_array.size() == 0):&#000a;&#0009;&#0009;for j in range(10):&#000a;&#0009;&#0009;&#0009;pos_array.push_back(start_pos)&#000a;        &#000a;&#000a;&#0009;velocity.y += delta * GRAVITY&#000a;&#0009;var motion = velocity * delta&#000a;&#0009;motion = move(motion) &#000a;&#000a;&#0009;get_node(&quot;Sprite&quot;).rotate(PI * -direction/15)&#000a;&#0009;get_node(&quot;s2&quot;).rotate(PI * -direction/15)&#000a;&#0009;get_node(&quot;s3&quot;).rotate(PI * -direction/15)&#000a;&#000a;&#0009;get_node(&quot;s2&quot;).set_global_pos(pos_array[4])&#000a;&#0009;get_node(&quot;s3&quot;).set_global_pos(pos_array[9])&#000a;&#000a;&#0009;for i in range(9):&#000a;&#0009;&#0009;pos_array[9 - i] = pos_array[8 - i]&#000a;&#0009;pos_array[0] = get_node(&quot;Sprite&quot;).get_global_pos()&#000a;&#000a;    &#000a;&#000a;&#0009;if (is_colliding()): &#000a;&#0009;&#0009;var n = get_collision_normal()&#000a;&#0009;&#0009;motion = n.slide(motion)&#000a;&#0009;&#0009;velocity = n.slide(velocity)&#000a;&#0009;&#0009;get_node(&quot;sparks&quot;).set_global_pos(get_collision_pos())&#000a;&#0009;&#0009;get_node(&quot;sparks&quot;).set_rot(PI + (velocity.angle()))&#000a;&#0009;&#0009;get_node(&quot;sparks&quot;).set_emitting(true)   &#000a;&#0009;&#0009;if (abs(n[0]) == 1):&#000a;&#0009;&#0009;&#0009;direction *= -1&#000a;&#0009;&#0009;elif (n[0] &gt; .5 and n[0] &lt; .9): &#000a;&#0009;&#0009;&#0009;velocity.x = (WALK_SPEED - .5 * sqrt(velocity.y * velocity.y)) * direction&#000a;&#0009;&#0009;elif (n[0] &lt; -.5 and n[0] &gt; -.9):&#000a;&#0009;&#0009;&#0009;velocity.x = (WALK_SPEED - .5 * sqrt(velocity.y * velocity.y)) * direction&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;velocity.x = WALK_SPEED * direction&#000a;&#0009;else:&#000a;&#0009;&#0009;get_node(&quot;sparks&quot;).set_emitting(false)&#000a;&#000a;&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<resource type="CircleShape2D" path="local://16">
+		<real name="custom_solver_bias"> 0 </real>
+		<real name="radius"> 31.801989 </real>
+
+	</resource>
+	<resource type="GDScript" path="local://18">
+		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_name() == &quot;Player&quot; ):&#000a;&#0009;&#0009;&#0009;if ( body.delay == 0 ):&#000a;&#0009;&#0009;&#0009;&#0009;body.get_node(&quot;hitLight&quot;).set_enabled(true)&#000a;&#0009;&#0009;&#0009;&#0009;body.set_layer_mask_bit(2, false)&#000a;&#0009;&#0009;&#0009;&#0009;body.delay = 60&#000a;&#0009;&#0009;&#0009;&#0009;body.health -= 15&#000a;&#0009;&#0009;&#0009;&#0009;print(&quot;Ahhh!! FIRE!!!&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    " </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="57">
+				<string> "flamering" </string>
+				<string> "visibility/light_mask" </string>
+				<string> "transform/pos" </string>
+				<string> "transform/scale" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "collision/margin" </string>
+				<string> "script/script" </string>
+				<string> "KinematicBody2D" </string>
+				<string> "Sprite" </string>
+				<string> "texture" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "shape" </string>
+				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
+				<string> "s2" </string>
+				<string> "visibility/opacity" </string>
+				<string> "s3" </string>
+				<string> "sparks" </string>
+				<string> "config/amount" </string>
+				<string> "config/lifetime" </string>
+				<string> "config/emit_timeout" </string>
+				<string> "config/emitting" </string>
+				<string> "config/local_space" </string>
+				<string> "config/texture" </string>
+				<string> "params/direction" </string>
+				<string> "params/spread" </string>
+				<string> "params/linear_velocity" </string>
+				<string> "params/spin_velocity" </string>
+				<string> "params/orbit_velocity" </string>
+				<string> "params/gravity_direction" </string>
+				<string> "params/gravity_strength" </string>
+				<string> "params/radial_accel" </string>
+				<string> "params/tangential_accel" </string>
+				<string> "params/damping" </string>
+				<string> "params/initial_angle" </string>
+				<string> "params/initial_size" </string>
+				<string> "params/final_size" </string>
+				<string> "params/hue_variation" </string>
+				<string> "params/anim_speed_scale" </string>
+				<string> "params/anim_initial_pos" </string>
+				<string> "randomness/linear_velocity" </string>
+				<string> "randomness/initial_size" </string>
+				<string> "randomness/final_size" </string>
+				<string> "randomness/hue_variation" </string>
+				<string> "color/color" </string>
+				<string> "Particles2D" </string>
+				<string> "flamehit" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "Area2D" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 8 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="206"> 				-1, -1, 12, 0, -1, 11, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 3, 8, 0, 9, 6, 10, 7, 11, 8, 0, 0, 0, 13, 13, -1, 4, 1, 9, 2, 10, 3, 11, 14, 12, 0, 0, 0, 15, 15, -1, 5, 2, 13, 3, 14, 16, 4, 17, 3, 18, 15, 0, 0, 0, 13, 19, -1, 5, 20, 16, 1, 9, 2, 17, 3, 11, 14, 12, 0, 0, 0, 13, 21, -1, 5, 20, 18, 1, 9, 2, 19, 3, 11, 14, 12, 0, 0, 0, 50, 22, -1, 29, 2, 20, 3, 21, 23, 22, 24, 16, 25, 16, 26, 3, 27, 3, 28, 23, 29, 24, 30, 25, 31, 26, 32, 26, 33, 24, 34, 24, 35, 27, 36, 24, 37, 24, 38, 24, 39, 24, 40, 28, 41, 28, 42, 24, 43, 28, 44, 24, 45, 16, 46, 28, 47, 28, 48, 29, 49, 30, 0, 0, 0, 56, 51, -1, 12, 2, 20, 4, 31, 5, 32, 6, 33, 7, 31, 52, 34, 53, 35, 54, 36, 55, 28, 8, 15, 9, 37, 11, 38, 0, 6, 0, 15, 15, -1, 4, 2, 39, 16, 32, 17, 31, 18, 15, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="40" shared="false">
+				<int> 32 </int>
+				<vector2> -75, -225 </vector2>
+				<vector2> 0.78125, 0.78125 </vector2>
+				<bool> False </bool>
+				<resource  resource_type="Shape2D" path="local://3">  </resource>
+				<matrix32> 15.0814, -0, 0, 0.492308, -0.364228, 12.8 </matrix32>
+				<int> 1 </int>
+				<real> 0.08 </real>
+				<resource  resource_type="Script" path="local://4">  </resource>
+				<int> 8 </int>
+				<vector2> 7.12077e-006, 16 </vector2>
+				<vector2> 1.06667, 1.06667 </vector2>
+				<resource  external="0">  </resource>
+				<vector2> -0.364228, 12.8 </vector2>
+				<vector2> 15.0814, 0.492308 </vector2>
+				<int> 0 </int>
+				<real> 0.5 </real>
+				<vector2> -1.41826, -26.5485 </vector2>
+				<real> 0.25 </real>
+				<vector2> -1.41826, -49.241 </vector2>
+				<vector2> 0, 19.2 </vector2>
+				<vector2> 1.28, 6.4 </vector2>
+				<int> 100 </int>
+				<resource  external="1">  </resource>
+				<real> 0 </real>
+				<real> 50 </real>
+				<real> 200 </real>
+				<real> 9.8 </real>
+				<real> 1 </real>
+				<real> 0.03 </real>
+				<color> 1, 0.721569, 0.192157, 1 </color>
+				<bool> True </bool>
+				<resource  resource_type="Shape2D" path="local://16">  </resource>
+				<matrix32> 1, -0, 0, 1, 0.198631, -2.36136 </matrix32>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<int> 4 </int>
+				<resource  resource_type="Script" path="local://18">  </resource>
+				<vector2> 0.198631, -2.36136 </vector2>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

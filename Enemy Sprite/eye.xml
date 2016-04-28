@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="7" version="2.0" version_name="Godot Engine v2.0.stable.custom_build">
+	<ext_resource path="res://Enemy Sprite/eyeball.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://Enemy Sprite/flamering.png" type="Texture" index="1"></ext_resource>
+	<resource type="CircleShape2D" path="local://13">
+		<real name="custom_solver_bias"> 0 </real>
+		<real name="radius"> 8.246211 </real>
+
+	</resource>
+	<resource type="GDScript" path="local://15">
+		<string name="script/source"> "extends KinematicBody2D&#000a;&#000a;const FLY_SPEED = 100&#000a;&#000a;var velocity = Vector2(0, 0)&#000a;var rand_angle = 0&#000a;var rand_component = 0&#000a;var player_angle = 0&#000a;var player_component = 0&#000a;var vel_component = 0&#000a;var normalization = 0&#000a;var delay = 0&#000a;var cooldown = 0&#000a;var laserCount = 0&#000a;var baselaser = preload(&quot;res://Enemy Sprite/laser.xml&quot;)&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if cooldown &gt; 0:&#000a;&#0009;&#0009;cooldown -= 1&#000a;&#0009;if delay &lt;= 0:&#000a;&#0009;&#0009;rand_angle = rand_range(0, 2 * PI)&#000a;&#0009;&#0009;player_angle = get_angle_to(get_node(&quot;/root/Node2D/Player/CollisionShape2D&quot;).get_global_pos())&#000a;&#0009;&#0009;rand_component = rand_range(1,2)&#000a;&#0009;&#0009;player_component = rand_range(1,2)&#000a;&#0009;&#0009;vel_component = rand_range(1,2)&#000a;&#0009;&#0009;normalization = (Vector2(rand_component * sin(rand_angle), rand_component * cos(rand_angle)) + Vector2(player_component * sin(player_angle), player_component * cos(player_angle)) + Vector2(vel_component * sin(velocity.angle()), vel_component * cos(velocity.angle()))).normalized()&#000a;&#0009;&#0009;velocity = normalization * FLY_SPEED&#000a;&#0009;&#0009;if get_global_pos().distance_to(get_node(&quot;/root/Node2D/Player/CollisionShape2D&quot;).get_global_pos()) &lt; 250:&#000a;&#0009;&#0009;&#0009;velocity *= .1&#000a;&#0009;&#0009;&#0009;get_node(&quot;Sprite/Sprite 2&quot;).rotate(.5)&#000a;&#0009;&#0009;&#0009;get_node(&quot;Sprite/Sprite 2&quot;).set_hidden(false)&#000a;&#0009;&#0009;&#0009;if cooldown == 0:&#000a;&#0009;&#0009;&#0009;&#0009;fire_laser()&#000a;&#0009;&#0009;&#0009;&#0009;cooldown = 75&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;get_node(&quot;Sprite/Sprite 2&quot;).set_hidden(true)&#000a;&#0009;&#0009;get_node(&quot;Sprite&quot;).set_rot((PI / -2) + (velocity.angle()))&#000a;&#0009;&#0009;delay = 5&#000a;&#0009;else:&#000a;&#0009;&#0009;delay -= 1&#000a;&#0009;var motion = velocity * delta&#000a;&#0009;motion = move(motion)&#000a;    &#000a;&#000a;&#0009;if (is_colliding()): &#000a;&#0009;&#0009;var n = get_collision_normal()&#000a;&#0009;&#0009;motion = n.slide(motion)&#000a;&#0009;&#0009;velocity = n.slide(velocity)&#000a;&#000a;func fire_laser():&#000a;&#0009;print(&quot;fire&quot;)&#000a;&#0009;var laser = baselaser.instance()&#000a;&#0009;get_node(&quot;/root/Node2D&quot;).add_child(laser)&#000a;&#0009;laser.set_pos(get_global_pos())&#000a;&#0009;laser.set_rot(get_node(&quot;Sprite&quot;).get_rot())&#000a;&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)&#000a;" </string>
+
+	</resource>
+	<resource type="CircleShape2D" path="local://14">
+		<real name="custom_solver_bias"> 0 </real>
+		<real name="radius"> 13.341664 </real>
+
+	</resource>
+	<resource type="GDScript" path="local://20">
+		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_name() == &quot;Player&quot; ):&#000a;&#0009;&#0009;&#0009;if ( body.delay == 0 ):&#000a;&#0009;&#0009;&#0009;&#0009;body.get_node(&quot;hitLight&quot;).set_enabled(true)&#000a;&#0009;&#0009;&#0009;&#0009;body.set_layer_mask_bit(2, false)&#000a;&#0009;&#0009;&#0009;&#0009;body.delay = 60&#000a;&#0009;&#0009;&#0009;&#0009;body.health -= 10&#000a;&#0009;&#0009;&#0009;&#0009;print(&quot;Ewww Squishy...&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    " </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="27">
+				<string> "eyeball" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "collision/margin" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "KinematicBody2D" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "shape" </string>
+				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
+				<string> "Sprite" </string>
+				<string> "texture" </string>
+				<string> "Sprite 2" </string>
+				<string> "visibility/blend_mode" </string>
+				<string> "transform/pos" </string>
+				<string> "transform/scale" </string>
+				<string> "eyehit" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "Area2D" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 6 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="104"> 				-1, -1, 10, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 0, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 0, 0, 0, 11, 11, -1, 3, 12, 1, 13, 0, 14, 8, 0, 0, 0, 15, 15, -1, 1, 16, 9, 0, 2, 0, 15, 17, -1, 4, 18, 10, 19, 11, 20, 12, 16, 13, 0, 0, 0, 26, 21, -1, 11, 1, 14, 2, 15, 3, 2, 4, 14, 22, 16, 23, 17, 24, 18, 25, 19, 5, 8, 6, 20, 8, 21, 0, 4, 0, 11, 11, -1, 3, 12, 15, 13, 14, 14, 8, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="22" shared="false">
+				<bool> False </bool>
+				<resource  resource_type="Shape2D" path="local://13">  </resource>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<int> 8 </int>
+				<int> 1 </int>
+				<real> 0.08 </real>
+				<resource  resource_type="Script" path="local://15">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+				</dictionary>
+				<int> 0 </int>
+				<resource  external="0">  </resource>
+				<int> 2 </int>
+				<vector2> 5.00001, -1.21593e-005 </vector2>
+				<vector2> 0.25, 0.25 </vector2>
+				<resource  external="1">  </resource>
+				<bool> True </bool>
+				<resource  resource_type="Shape2D" path="local://14">  </resource>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<real> 1 </real>
+				<int> 4 </int>
+				<resource  resource_type="Script" path="local://20">  </resource>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
