@@ -7,7 +7,8 @@ var left = false
 var animation_ctr = 0 
 var velocity = Vector2()
 var motion = Vector2()
-var damage_delay = 10
+var health = 100
+
 var score = 0
 var jmp_detect = 0 
 var n = Vector2()
