@@ -7,7 +7,7 @@ var left = false
 var animation_ctr = 0 
 var velocity = Vector2()
 var motion = Vector2()
-var health = 100
+var damage_delay = 10
 var score = 0
 var jmp_detect = 0 
 var n = Vector2()
@@ -33,6 +33,8 @@ func _ready():
 
 
 func _move_player(delta):
+	if health <= 0:
+		get_node("/root/global").setScene("res://Scenes/GameOver.scn")
 	velocity.y += delta * GRAVITY
 	if velocity.x > MOVE_SPEED:
 		velocity.x = MOVE_SPEED
@@ -40,7 +42,6 @@ func _move_player(delta):
 		velocity.x = -MOVE_SPEED
 	motion = velocity * delta
 	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
-	get_node("HUD ParaBKG/HUD ParaLYR/Health").set_value(health)
 	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(100 - health)
 	
 	if is_colliding():
