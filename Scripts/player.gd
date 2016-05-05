@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var MOVE_SPEED = 200.0
+var MOVE_SPEED = 175.0
 var GRAVITY = 500.0
 
 var left = false
@@ -8,20 +8,27 @@ var animation_ctr = 0
 var velocity = Vector2()
 var motion = Vector2()
 var health = 100
-
+var countdown = 120
 var score = 0
 var jmp_detect = 0 
 var n = Vector2()
 var delay = 0
 
 func _fixed_process(delta):
-	_move_player(delta)
-	if delay < 15:
-		get_node("hitLight").set_enabled(false)
-	if delay > 0:
-		delay -= 1
-	if delay == 0:
-		set_layer_mask_bit(2, true)
+	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
+	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(100 - health)
+	if health <= 0:
+		death()
+	else:
+		velocity.y += delta * GRAVITY
+		motion = velocity * delta
+		_move_player(delta)
+		if delay < 15:
+			get_node("hitLight").set_enabled(false)
+		if delay > 0:
+			delay -= 1
+		if delay == 0:
+			set_layer_mask_bit(2, true)
 
 
 func _ready():
@@ -34,25 +41,17 @@ func _ready():
 
 
 func _move_player(delta):
-	if health <= 0:
-		get_node("/root/global").setScene("res://Scenes/GameOver.scn")
-	velocity.y += delta * GRAVITY
-	if velocity.x > MOVE_SPEED:
-		velocity.x = MOVE_SPEED
-	if velocity.x < -MOVE_SPEED:
-		velocity.x = -MOVE_SPEED
-	motion = velocity * delta
-	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
-	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(100 - health)
-	
 	if is_colliding():
 		jmp_detect = 0
 		n = get_collision_normal()
 		motion = n.slide(motion)
+		if n.x != 0 and n.y < -0.5: #Ramp walking speedup
+			motion *= 2
 		move(motion)
 		velocity = n.slide(velocity)
-		if ( Input.is_action_pressed("ui_up")):
-			if n.y < 0:
+		if n.y < -0.5:
+			velocity.y = 0 #Player ramping prevention
+			if ( Input.is_action_pressed("ui_up")):
 				velocity.y = -300
 				score += 1
 		if ( Input.is_action_pressed("ui_left")):
@@ -80,6 +79,7 @@ func _move_player(delta):
 			get_node("Run_Right").set_hidden(true)
 			get_node("Sprite_Left").set_hidden(not left)
 			get_node("Sprite_Right").set_hidden(left)
+
 	else:
 		move(motion)
 		jmp_detect += 1
@@ -96,6 +96,17 @@ func _move_player(delta):
 		elif ( Input.is_action_pressed("ui_right")):
 			left = false
 			velocity.x += MOVE_SPEED * 0.1
+		if velocity.x > MOVE_SPEED:
+			velocity.x = MOVE_SPEED
+		if velocity.x < -MOVE_SPEED:
+			velocity.x = -MOVE_SPEED
+
+func death():
+	countdown -= 1
+	get_node("../StreamPlayer").set_volume_db(get_node("../StreamPlayer").get_volume_db() - .5)
+	get_node("../Fade").set_color(Color(get_node("../Fade").get_color().r - .05, get_node("../Fade").get_color().g - .05, get_node("../Fade").get_color().b - .05))
+	if countdown <= 0:
+		get_node("/root/global").setScene("res://Scenes/GameOver.scn")
 
 
 

@@ -16,7 +16,7 @@
 
 	</resource>
 	<resource type="GDScript" path="local://19">
-		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_name() == &quot;Player&quot; ):&#000a;&#0009;&#0009;&#0009;if ( body.delay == 0 ):&#000a;&#0009;&#0009;&#0009;&#0009;body.get_node(&quot;hitLight&quot;).set_enabled(true)&#000a;&#0009;&#0009;&#0009;&#0009;body.set_layer_mask_bit(2, false)&#000a;&#0009;&#0009;&#0009;&#0009;body.delay = 60&#000a;&#0009;&#0009;&#0009;&#0009;body.health -= 10&#000a;&#0009;&#0009;&#0009;&#0009;print(&quot;Really, the slime hit you?&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    &#000a;" </string>
+		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_name() == &quot;Player&quot; ):&#000a;&#0009;&#0009;&#0009;if ( body.delay == 0 ):&#000a;&#0009;&#0009;&#0009;&#0009;body.get_node(&quot;hitLight&quot;).set_enabled(true)&#000a;&#0009;&#0009;&#0009;&#0009;body.set_layer_mask_bit(2, false)&#000a;&#0009;&#0009;&#0009;&#0009;body.delay = 60&#000a;&#0009;&#0009;&#0009;&#0009;body.health -= 100&#000a;&#0009;&#0009;&#0009;&#0009;print(&quot;Really, the slime hit you?&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    &#000a;" </string>
 
 	</resource>
 	<main_resource>
