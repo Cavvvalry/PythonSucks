@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="5" version="2.0" version_name="Godot Engine v2.0.stable.custom_build">
-	<ext_resource path="res://demo/particle.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://Character Sprite/laser.png" type="Texture" index="0"></ext_resource>
+	<ext_resource path="res://Character Sprite/particle.png" type="Texture" index="1"></ext_resource>
 	<resource type="RectangleShape2D" path="local://11">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2 name="extents"> 10, 2 </vector2>
+		<vector2 name="extents"> 10, 10 </vector2>
 
 	</resource>
 	<resource type="GDScript" path="local://12">
-		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_type() != &quot;TileMap&quot; ):&#000a;&#0009;&#0009;&#0009;body.health -= 10&#000a;&#0009;&#0009;&#0009;print(&quot;HIT&quot;)&#000a;&#0009;&#0009;queue_free()&#000a;&#0009;move_local_x(5)&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    &#000a;&#000a;" </string>
+		<string name="script/source"> "extends Area2D&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if not (get_overlapping_bodies().empty()): &#000a;&#0009;&#0009;var body = get_overlapping_bodies()[0]&#000a;&#0009;&#0009;if ( body.get_type() != &quot;TileMap&quot; ):&#000a;&#0009;&#0009;&#0009;body.health -= 10&#000a;&#0009;&#0009;&#0009;print(&quot;HIT&quot;)&#000a;&#0009;&#0009;queue_free()&#000a;&#0009;move_local_x(5)&#000a;&#0009;get_node(&quot;Sprite&quot;).rotate(-PI/15)&#000a;&#000a;&#000a;func _ready():&#000a;&#0009;set_fixed_process(true)    &#000a;&#000a;" </string>
 
 	</resource>
 	<main_resource>
@@ -21,7 +21,7 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="43">
+			<string_array  len="48">
 				<string> "bullethit" </string>
 				<string> "input/pickable" </string>
 				<string> "shapes/0/shape" </string>
@@ -32,6 +32,7 @@
 				<string> "linear_damp" </string>
 				<string> "angular_damp" </string>
 				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "Area2D" </string>
@@ -63,6 +64,10 @@
 				<string> "params/hue_variation" </string>
 				<string> "params/anim_speed_scale" </string>
 				<string> "params/anim_initial_pos" </string>
+				<string> "randomness/direction" </string>
+				<string> "randomness/linear_velocity" </string>
+				<string> "randomness/spin_velocity" </string>
+				<string> "randomness/initial_angle" </string>
 				<string> "randomness/hue_variation" </string>
 				<string> "color/color" </string>
 			</string_array>
@@ -72,9 +77,9 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="104"> 				-1, -1, 12, 0, -1, 11, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10, 0, 0, 0, 13, 13, -1, 3, 14, 1, 15, 3, 16, 11, 0, 0, 0, 17, 17, -1, 2, 18, 12, 19, 13, 0, 0, 0, 20, 20, -1, 22, 21, 14, 22, 15, 23, 3, 24, 16, 25, 17, 26, 18, 27, 19, 28, 18, 29, 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36, 21, 37, 7, 38, 20, 39, 7, 40, 20, 41, 22, 42, 23, 0 </int_array>
+			<int_array  len="114"> 				-1, -1, 13, 0, -1, 12, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10, 12, 11, 0, 0, 0, 14, 14, -1, 3, 15, 1, 16, 3, 17, 12, 0, 0, 0, 18, 18, -1, 2, 19, 13, 20, 14, 0, 2, 0, 21, 21, -1, 26, 22, 15, 23, 16, 24, 3, 25, 17, 26, 18, 27, 19, 28, 20, 29, 20, 30, 21, 31, 21, 32, 21, 33, 7, 34, 21, 35, 21, 36, 21, 37, 16, 38, 7, 39, 21, 40, 7, 41, 21, 42, 22, 43, 7, 44, 7, 45, 7, 46, 23, 47, 24, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="24" shared="false">
+			<array  len="25" shared="false">
 				<bool> True </bool>
 				<resource  resource_type="Shape2D" path="local://11">  </resource>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
@@ -84,24 +89,25 @@
 				<real> 0.1 </real>
 				<real> 1 </real>
 				<int> 16384 </int>
+				<int> 9 </int>
 				<resource  resource_type="Script" path="local://12">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 				</dictionary>
 				<int> 0 </int>
 				<resource  external="0">  </resource>
 				<color> 0, 1, 1, 1 </color>
-				<int> 20 </int>
-				<real> 0.5 </real>
+				<int> 25 </int>
+				<real> 2 </real>
 				<resource  external="1">  </resource>
 				<real> 270 </real>
+				<real> 25 </real>
 				<real> 10 </real>
-				<real> 100 </real>
 				<real> 0 </real>
-				<real> 3 </real>
+				<real> 0.5 </real>
 				<real> 0.05 </real>
-				<color> 0.136276, 0.752358, 0.894531, 1 </color>
+				<color> 0, 0.317871, 0.726563, 1 </color>
 			</array>
 			<string> "version" </string>
 			<int> 2 </int>
