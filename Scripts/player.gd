@@ -13,6 +13,9 @@ var score = 0
 var jmp_detect = 0 
 var n = Vector2()
 var delay = 0
+var shot_delay = 0
+var gun_dir = 0
+var baselaser = preload("res://Character Sprite/laser.xml")
 
 func _fixed_process(delta):
 	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
@@ -23,12 +26,27 @@ func _fixed_process(delta):
 		velocity.y += delta * GRAVITY
 		motion = velocity * delta
 		_move_player(delta)
+		if shot_delay > 0:
+			shot_delay -= 1
+		if (Input.is_action_pressed("ui_shoot") and shot_delay == 0):
+			fire_laser()
+			shot_delay = 30
 		if delay < 15:
 			get_node("hitLight").set_enabled(false)
 		if delay > 0:
 			delay -= 1
 		if delay == 0:
 			set_layer_mask_bit(2, true)
+		if ( Input.is_action_pressed("ui_up")):
+			gun_dir = PI/2
+			if left:
+				get_node("gun").set_rot(-PI/2)
+			else:
+				get_node("gun").set_rot(PI/2)
+		else:
+			get_node("gun").set_rot(0)
+			gun_dir = left * PI
+		get_node("gun").set_flip_h(left)
 
 
 func _ready():
@@ -51,7 +69,7 @@ func _move_player(delta):
 		velocity = n.slide(velocity)
 		if n.y < -0.5:
 			velocity.y = 0 #Player ramping prevention
-			if ( Input.is_action_pressed("ui_up")):
+			if ( Input.is_action_pressed("ui_accept")):
 				velocity.y = -300
 				score += 1
 		if ( Input.is_action_pressed("ui_left")):
@@ -108,6 +126,12 @@ func death():
 	if countdown <= 0:
 		get_node("/root/global").setScene("res://Scenes/GameOver.scn")
 
+func fire_laser():
+	print("Pew")
+	var laser = baselaser.instance()
+	get_node("/root/Node2D").add_child(laser)
+	laser.set_pos(get_node("gun").get_global_pos())
+	laser.set_rot(gun_dir)
 
 
 

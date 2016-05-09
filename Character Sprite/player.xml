@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="18" version="2.0" version_name="Godot Engine v2.0.stable.official">
-	<ext_resource path="res://Scripts/player.gd" type="Script" index="0"></ext_resource>
-	<ext_resource path="res://Character Sprite/white.png" type="Texture" index="13"></ext_resource>
-	<ext_resource path="res://Character Sprite/progress.png" type="Texture" index="11"></ext_resource>
-	<ext_resource path="res://Character Sprite/over.png" type="Texture" index="12"></ext_resource>
+<resource_file type="PackedScene" subresource_count="19" version="2.0" version_name="Godot Engine v2.0.stable.custom_build">
 	<ext_resource path="res://Character Sprite/player_run_right0003.png" type="Texture" index="6"></ext_resource>
-	<ext_resource path="res://Character Sprite/Stand left.png" type="Texture" index="2"></ext_resource>
-	<ext_resource path="res://Character Sprite/Stand right.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://Character Sprite/player_run_left0002.png" type="Texture" index="9"></ext_resource>
-	<ext_resource path="res://Character Sprite/player_run_right0002.png" type="Texture" index="5"></ext_resource>
-	<ext_resource path="res://Character Sprite/player_run_right0000.png" type="Texture" index="3"></ext_resource>
-	<ext_resource path="res://Character Sprite/player_run_left0000.png" type="Texture" index="7"></ext_resource>
 	<ext_resource path="res://Character Sprite/player_run_left0003.png" type="Texture" index="10"></ext_resource>
+	<ext_resource path="res://Character Sprite/player_run_right0002.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://Character Sprite/Stand left.png" type="Texture" index="2"></ext_resource>
+	<ext_resource path="res://Character Sprite/player_run_left0000.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://Character Sprite/Stand right.png" type="Texture" index="1"></ext_resource>
 	<ext_resource path="res://Character Sprite/player_run_left0001.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://Character Sprite/over.png" type="Texture" index="13"></ext_resource>
+	<ext_resource path="res://Character Sprite/progress.png" type="Texture" index="12"></ext_resource>
 	<ext_resource path="res://Character Sprite/player_run_right0001.png" type="Texture" index="4"></ext_resource>
+	<ext_resource path="res://Character Sprite/gun.png" type="Texture" index="11"></ext_resource>
+	<ext_resource path="res://Character Sprite/player_run_right0000.png" type="Texture" index="3"></ext_resource>
+	<ext_resource path="res://Character Sprite/white.png" type="Texture" index="14"></ext_resource>
+	<ext_resource path="res://Scripts/player.gd" type="Script" index="0"></ext_resource>
 	<resource type="RectangleShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2 name="extents"> 10, 10 </vector2>
@@ -47,7 +48,7 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "names" </string>
-			<string_array  len="105">
+			<string_array  len="106">
 				<string> "Player" </string>
 				<string> "input/pickable" </string>
 				<string> "shapes/0/shape" </string>
@@ -92,6 +93,7 @@
 				<string> "frames" </string>
 				<string> "AnimatedSprite" </string>
 				<string> "Run_Left" </string>
+				<string> "gun" </string>
 				<string> "HUD ParaBKG" </string>
 				<string> "layer" </string>
 				<string> "offset" </string>
@@ -155,14 +157,14 @@
 				<string> "Light2D" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 12 </int>
+			<int> 13 </int>
 			<string> "node_paths" </string>
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="298"> 				-1, -1, 10, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 0, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 0, 0, 0, 11, 11, -1, 5, 12, 8, 13, 9, 14, 1, 15, 0, 16, 10, 0, 0, 0, 17, 17, -1, 17, 12, 11, 18, 4, 19, 0, 20, 12, 21, 13, 22, 14, 23, 14, 24, 15, 25, 15, 26, 12, 27, 12, 28, 0, 29, 16, 30, 17, 31, 17, 32, 17, 33, 17, 0, 0, 0, 38, 34, -1, 4, 35, 18, 12, 19, 36, 20, 37, 0, 0, 0, 0, 38, 39, -1, 4, 35, 18, 12, 19, 36, 21, 37, 0, 0, 0, 0, 42, 40, -1, 3, 35, 18, 12, 22, 41, 23, 0, 0, 0, 42, 43, -1, 3, 35, 18, 12, 22, 41, 24, 0, 0, 0, 55, 44, -1, 10, 45, 4, 46, 25, 47, 26, 48, 13, 49, 27, 50, 27, 51, 13, 52, 27, 53, 27, 54, 12, 0, 7, 0, 59, 56, -1, 2, 57, 27, 58, 27, 0, 8, 0, 72, 60, -1, 11, 61, 28, 62, 29, 63, 30, 64, 31, 65, 12, 66, 12, 67, 32, 68, 33, 69, 34, 70, 10, 71, 35, 0, 8, 0, 88, 73, -1, 21, 61, 36, 62, 37, 63, 38, 64, 39, 65, 0, 66, 12, 67, 32, 74, 32, 75, 26, 76, 40, 77, 34, 78, 26, 79, 34, 80, 0, 81, 0, 82, 41, 83, 42, 84, 43, 85, 3, 86, 44, 87, 27, 0, 0, 0, 104, 89, -1, 18, 90, 12, 36, 45, 46, 27, 48, 28, 91, 46, 92, 28, 85, 32, 93, 26, 94, 47, 95, 48, 96, 10, 97, 10, 98, 32, 99, 0, 100, 49, 101, 50, 102, 51, 103, 4, 0 </int_array>
+			<int_array  len="311"> 				-1, -1, 10, 0, -1, 9, 1, 0, 2, 1, 3, 2, 4, 0, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 0, 0, 0, 11, 11, -1, 5, 12, 8, 13, 9, 14, 1, 15, 0, 16, 10, 0, 0, 0, 17, 17, -1, 17, 12, 11, 18, 4, 19, 0, 20, 12, 21, 13, 22, 14, 23, 14, 24, 15, 25, 15, 26, 12, 27, 12, 28, 0, 29, 16, 30, 17, 31, 17, 32, 17, 33, 17, 0, 0, 0, 38, 34, -1, 4, 35, 18, 12, 19, 36, 20, 37, 0, 0, 0, 0, 38, 39, -1, 4, 35, 18, 12, 19, 36, 21, 37, 0, 0, 0, 0, 42, 40, -1, 3, 35, 18, 12, 22, 41, 23, 0, 0, 0, 42, 43, -1, 3, 35, 18, 12, 22, 41, 24, 0, 0, 0, 38, 44, -1, 3, 35, 18, 12, 25, 36, 26, 0, 0, 0, 56, 45, -1, 10, 46, 4, 47, 27, 48, 28, 49, 13, 50, 29, 51, 29, 52, 13, 53, 29, 54, 29, 55, 12, 0, 8, 0, 60, 57, -1, 2, 58, 29, 59, 29, 0, 9, 0, 73, 61, -1, 11, 62, 30, 63, 31, 64, 32, 65, 33, 66, 12, 67, 12, 68, 34, 69, 35, 70, 36, 71, 10, 72, 37, 0, 9, 0, 89, 74, -1, 21, 62, 38, 63, 39, 64, 40, 65, 41, 66, 0, 67, 12, 68, 34, 75, 34, 76, 28, 77, 42, 78, 36, 79, 28, 80, 36, 81, 0, 82, 0, 83, 43, 84, 44, 85, 45, 86, 3, 87, 46, 88, 29, 0, 0, 0, 105, 90, -1, 18, 91, 12, 36, 47, 47, 29, 49, 30, 92, 48, 93, 30, 86, 34, 94, 28, 95, 49, 96, 50, 97, 10, 98, 10, 99, 34, 100, 0, 101, 51, 102, 52, 103, 53, 104, 4, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="52" shared="false">
+			<array  len="54" shared="false">
 				<bool> False </bool>
 				<resource  resource_type="Shape2D" path="local://1">  </resource>
 				<matrix32> 1.07937, -0, 0, 2.95454, -0.709936, -7.32625 </matrix32>
@@ -191,6 +193,8 @@
 				<vector2> 0, -17 </vector2>
 				<resource  resource_type="SpriteFrames" path="local://2">  </resource>
 				<resource  resource_type="SpriteFrames" path="local://3">  </resource>
+				<vector2> 0, -10 </vector2>
+				<resource  external="11">  </resource>
 				<vector2> 60, 30 </vector2>
 				<real> 0 </real>
 				<vector2> 0, 0 </vector2>
@@ -207,10 +211,10 @@
 				<real> 63 </real>
 				<real> 101 </real>
 				<real> 100 </real>
-				<resource  external="11">  </resource>
-				<resource name=""></resource>				<resource  external="12">  </resource>
+				<resource  external="12">  </resource>
+				<resource name=""></resource>				<resource  external="13">  </resource>
 				<real> 360 </real>
-				<resource  external="13">  </resource>
+				<resource  external="14">  </resource>
 				<color> 0.542969, 0.112411, 0.112411, 1 </color>
 				<int> -1024 </int>
 				<int> 1024 </int>
