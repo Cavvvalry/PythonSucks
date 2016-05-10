@@ -19,7 +19,7 @@ var baselaser = preload("res://Character Sprite/laser.xml")
 
 func _fixed_process(delta):
 	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
-	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(100 - health)
+	get_node("HUD ParaBKG/HUD ParaLYR/Health2").set_value(health)
 	if health <= 0:
 		death()
 	else:
