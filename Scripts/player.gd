@@ -16,6 +16,7 @@ var delay = 0
 var shot_delay = 0
 var gun_dir = 0
 var baselaser = preload("res://Character Sprite/laser.xml")
+var baseslime = preload("res://Enemy Sprite/slime.xml")
 
 func _fixed_process(delta):
 	get_node("HUD ParaBKG/HUD ParaLYR/Score").set_text(str(score))
@@ -47,6 +48,9 @@ func _fixed_process(delta):
 			get_node("gun").set_rot(0)
 			gun_dir = left * PI
 		get_node("gun").set_flip_h(left)
+		if (Input.is_action_pressed("ui_focus_next")):
+			spawn_death()
+
 
 
 func _ready():
@@ -133,6 +137,12 @@ func fire_laser():
 	laser.set_pos(get_node("gun").get_global_pos())
 	laser.set_rot(gun_dir)
 
+func spawn_death():
+	print("You messed up")
+	var slime = baseslime.instance()
+	get_node("/root/Node2D").add_child(slime)
+	slime.set_scale(Vector2(4,4))
+	slime.set_pos(get_node("gun").get_global_pos() + Vector2(0, -300))
 
 
 
